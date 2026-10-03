@@ -150,16 +150,16 @@
   </style>
 </head>
 <body>
-  <!-- === TODO TU HTML ORIGINAL AQUÍ (desde <nav> hasta el footer) === -->
-  <!-- Pega aquí todo lo que ya tenías en tu index.html original -->
+  <!-- === TU HTML ORIGINAL (todo lo que ya tenías) === -->
+  <!-- Pega aquí todo el código que ya tenías antes de la burbuja -->
 
-  <!-- === BURBUJA FINAL (con icono, sonido y todo pro) === -->
+  <!-- === BURBUJA FINAL (con foto y todo pro) === -->
   <div id="appBubble" 
        class="fixed bottom-6 right-6 z-50 flex flex-col items-center cursor-pointer group transition-all duration-300">
     <div class="w-20 h-20 bg-white rounded-full shadow-2xl flex items-center justify-center 
                 transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-blue-400 ring-4 ring-blue-500 ring-offset-4">
       <img src="image.png" 
-           alt="MEmori" 
+           alt="Equipo MEmori" 
            class="w-16 h-16 rounded-full object-cover transition-all duration-300">
     </div>
     <div class="text-center text-xs mt-1 text-gray-600 font-medium tracking-wide">
@@ -181,23 +181,21 @@
     });
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // === BURBUJA CON TODO LO QUE PEDISTE ===
+    // === BURBUJA CON TODO ===
     const bubble = document.getElementById("appBubble");
 
     // Sonido al hacer clic
     function playSound() {
-      const sound = new Audio("https://assets.mixkit.co/sfx/preview/274/274.wav"); // sonido de botón (puedes cambiarlo)
+      const sound = new Audio("https://assets.mixkit.co/sfx/preview/274/274.wav");
       sound.volume = 0.3;
-      sound.play().catch(() => {}); // silencioso si falla
+      sound.play().catch(() => {});
     }
 
     bubble.addEventListener("click", () => {
       playSound();
-      // Abrir tu app web
       window.location.href = "https://stuwar110.github.io/MEmori/";
     });
 
-    // Animación extra en hover
     bubble.addEventListener("mouseenter", () => {
       bubble.style.transform = "scale(1.08)";
     });
