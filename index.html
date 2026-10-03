@@ -3,205 +3,508 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MEmori - Tu aliado en cada dosis.">
+  <meta name="theme-color" content="#3f45df">
+  <meta name="description" content="MEmori - Tu aliado en cada dosis. Organiza medicamentos, citas y recordatorios de forma sencilla.">
+  <meta property="og:title" content="MEmori | Tu aliado en cada dosis">
+  <meta property="og:description" content="Organiza medicamentos, citas y recordatorios de forma sencilla.">
+  <meta property="og:type" content="website">
   <title>MEmori | Tu aliado en cada dosis</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%233f45df'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle'%3E%F0%9F%92%8A%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --blue:#3f45df;
       --blue-dark:#20247f;
-      --blue-soft:#eef0ff;
       --green:#20b99b;
-      --pink:#d946c8;
       --ink:#182052;
-      --muted:#66708f;
-      --bg:#f7f9ff;
+      --muted:#5b6585;
       --white:#fff;
       --line:#e5e9f7;
       --shadow:0 18px 50px rgba(42,53,150,.13);
       --radius:26px;
+      --display:Poppins,"Segoe UI",Arial,sans-serif;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
     body{
       font-family:Inter,Arial,sans-serif;color:var(--ink);
       background:linear-gradient(180deg,#f8faff 0%,#fff 48%,#f5f7ff 100%);
       line-height:1.6;overflow-x:hidden
     }
     a{text-decoration:none;color:inherit}
+    img{max-width:100%;height:auto}
+    :focus-visible{outline:3px solid rgba(63,69,223,.55);outline-offset:3px}
+    .skip{position:absolute;left:-999px;top:8px;background:var(--blue);color:#fff;padding:10px 16px;border-radius:10px;z-index:100}
+    .skip:focus{left:8px}
     .container{width:min(1160px,92%);margin:auto}
-    .nav{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(18px);
-      background:rgba(248,250,255,.86);
-      border-bottom:1px solid rgba(229,233,247,.8)
-    }
-    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px;font-family:Poppins;font-weight:800;font-size:25px}
-    .brand-mark{
-      width:46px;height:46px;border-radius:14px;
-      background:linear-gradient(135deg,#5844e8,#3f45df);
-      display:grid;place-items:center;color:white;font-size:23px;
-      box-shadow:0 9px 24px rgba(63,69,223,.25)
-    }
-    .links{display:flex;gap:28px;font-size:14px;font-weight:600;color:#465078}
+
+    /* Navegación */
+    .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(248,250,255,.9);border-bottom:1px solid rgba(229,233,247,.8)}
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;font-size:25px}
+    .brand-mark{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#5844e8,#3f45df);display:grid;place-items:center;color:#fff;font-size:23px;box-shadow:0 9px 24px rgba(63,69,223,.25)}
+    .links{display:flex;gap:22px;font-size:14px;font-weight:600;color:#465078}
     .links a:hover{color:var(--blue)}
-    .nav-cta,.btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 19px;border-radius:999px;font-weight:700;border:1px solid transparent;
-      transition:.2s ease;cursor:pointer
-    }
-    .nav-cta,.btn-primary{background:var(--blue);color:white;box-shadow:0 10px 24px rgba(63,69,223,.23)}
-    .nav-cta:hover,.btn-primary:hover{transform:translateY(-2px);background:#3338c8}
-    .btn-secondary{background:white;border-color:var(--line);color:var(--blue)}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:20px;cursor:pointer;color:var(--blue)}
+
+    /* Botones */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 19px;border-radius:999px;font-weight:700;border:1px solid transparent;transition:transform .2s ease,background .2s ease;cursor:pointer;font-family:inherit;font-size:15px}
+    .btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 24px rgba(63,69,223,.23)}
+    .btn-primary:hover{transform:translateY(-2px);background:#3338c8}
+    .btn-secondary{background:#fff;border-color:var(--line);color:var(--blue)}
+    .btn-secondary:hover{border-color:var(--blue)}
+
+    /* Hero */
     .hero{padding:76px 0 56px;position:relative}
-    .hero:before,.hero:after{
-      content:"";position:absolute;border-radius:50%;filter:blur(3px);z-index:-1
-    }
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;z-index:-1}
     .hero:before{width:300px;height:300px;background:#dfe5ff;left:-150px;top:80px}
     .hero:after{width:260px;height:260px;background:#d8fff5;right:-120px;top:40px}
     .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:55px;align-items:center}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;background:#eceeff;color:var(--blue);
-      padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:18px
-    }
-    h1{font-family:Poppins;font-size:clamp(42px,6vw,72px);line-height:1.04;letter-spacing:-2.6px;margin-bottom:20px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#eceeff;color:var(--blue);padding:8px 13px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:18px}
+    h1{font-family:var(--display);font-size:clamp(40px,6vw,72px);line-height:1.04;letter-spacing:-2.6px;margin-bottom:20px}
     .gradient{background:linear-gradient(90deg,var(--blue-dark),#5844e8,var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
     .hero p{font-size:18px;color:var(--muted);max-width:600px;margin-bottom:28px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .hero-note{margin-top:18px;font-size:13px;color:#7b84a2}
-    .hero-image{
-      border-radius:32px;box-shadow:var(--shadow);width:100%;display:block;
-      border:7px solid white
-    }
+    .hero-note{margin-top:18px;font-size:14px;color:#5b6585}
+    .hero-image{border-radius:32px;box-shadow:var(--shadow);width:100%;display:block;border:7px solid #fff}
+
+    /* Secciones */
     section{padding:90px 0}
     .section-head{text-align:center;max-width:720px;margin:0 auto 44px}
-    .section-head .tag{color:var(--blue);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.4px}
-    h2{font-family:Poppins;font-size:clamp(30px,4vw,46px);line-height:1.1;margin:8px 0 14px}
+    .section-head .tag{color:var(--blue);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1.4px}
+    h2{font-family:var(--display);font-size:clamp(28px,4vw,46px);line-height:1.1;margin:8px 0 14px}
     .section-head p{color:var(--muted);font-size:16px}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{
-      background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);
-      padding:27px;box-shadow:0 10px 30px rgba(43,55,150,.06);transition:.2s
-    }
-    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-    .icon{
-      width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:25px;
-      margin-bottom:18px
-    }
+
+    /* Funciones (tarjetas desplegables) */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+    .card{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(43,55,150,.06);transition:box-shadow .2s,transform .2s}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .card-toggle{all:unset;box-sizing:border-box;display:block;width:100%;padding:27px;cursor:pointer;border-radius:var(--radius)}
+    .card-toggle:focus-visible{outline:3px solid rgba(63,69,223,.55);outline-offset:-3px}
+    .icon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:25px;margin-bottom:18px}
     .i-blue{background:#e8eaff}.i-green{background:#ddfbf4}.i-pink{background:#fde5fa}
     .i-purple{background:#eee6ff}.i-cyan{background:#e3f5ff}.i-yellow{background:#fff4d9}
-    .card h3{font-family:Poppins;font-size:20px;margin-bottom:7px}
+    .card h3{font-family:var(--display);font-size:20px;margin-bottom:7px}
     .card p{color:var(--muted);font-size:14px}
+    .more{display:inline-flex;margin-top:16px;padding:7px 12px;border-radius:999px;background:#f0f2ff;color:var(--blue);font-size:12px;font-weight:700}
+    .detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+    .detail-inner{overflow:hidden;padding:0 27px}
+    .detail-inner>div{border-top:1px solid var(--line);padding:17px 0 27px}
+    .detail p{font-size:13.5px;margin-top:6px}
+    .card.open{box-shadow:var(--shadow)}
+    .card.open .detail{grid-template-rows:1fr}
+    .card.open .more{background:var(--blue);color:#fff}
+
+    /* Pantallas */
     .showcase{background:linear-gradient(135deg,#f0f2ff,#edfffa);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .showcase-img{width:100%;border-radius:28px;display:block;box-shadow:var(--shadow);border:7px solid white}
-    .assistant{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-    .assistant-copy p{color:var(--muted);margin:14px 0 22px}
-    .check{display:flex;gap:11px;margin:13px 0;font-weight:600}
-    .check span{width:25px;height:25px;flex:0 0 25px;border-radius:50%;background:#dcfaf3;color:#0c9e83;display:grid;place-items:center;font-size:14px}
-    .chat{
-      background:#fff;border:1px solid var(--line);border-radius:30px;padding:22px;
-      box-shadow:var(--shadow)
-    }
-    .chat-top{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}
-    .bot{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#5444e8,#20b99b);display:grid;place-items:center;color:white}
-    .bubble{padding:13px 15px;border-radius:18px;margin:10px 0;max-width:88%;font-size:14px}
-    .user-b{margin-left:auto;background:#eceeff;color:#3137bd;border-bottom-right-radius:5px}
-    .bot-b{background:#f2f5fb;border-bottom-left-radius:5px}
-    .lang{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:25px}
-    .lang-card{padding:20px;border:1px solid var(--line);border-radius:22px;background:#fff}
-    .lang-card strong{font-size:18px}.lang-card p{font-size:13px;color:var(--muted);margin-top:5px}
+    .showcase-scroll{overflow-x:auto;border-radius:28px;-webkit-overflow-scrolling:touch}
+    .showcase-img{width:100%;display:block;border-radius:28px;box-shadow:var(--shadow);border:7px solid #fff}
+    .showcase-hint{display:none;text-align:center;font-size:13px;color:var(--muted);margin-top:12px}
+
+    /* Pasos */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .step{position:relative;padding:24px;background:#fff;border:1px solid var(--line);border-radius:22px}
-    .num{font-family:Poppins;color:var(--blue);font-size:31px;font-weight:800}
-    .step h3{font-size:17px;margin:5px 0}.step p{font-size:13px;color:var(--muted)}
-    .project{background:linear-gradient(135deg,#222781,#5047e8);color:white}
+    .step{padding:24px;background:#fff;border:1px solid var(--line);border-radius:22px}
+    .num{font-family:var(--display);color:var(--blue);font-size:31px;font-weight:800}
+    .step h3{font-size:17px;margin:5px 0;font-family:var(--display)}
+    .step p{font-size:14px;color:var(--muted)}
+
+    /* Proyecto */
+    .project{background:linear-gradient(135deg,#222781,#5047e8);color:#fff}
     .project-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:45px;align-items:center}
-    .project h2{font-size:40px}.project p{color:#e5e8ff;max-width:700px}
+    .project .tag{color:#c3c9ff;font-weight:700;font-size:13px;letter-spacing:1.4px}
+    .project h2{font-size:clamp(28px,4vw,40px)}
+    .project p{color:#e5e8ff;max-width:700px}
     .project-box{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:27px;border-radius:26px;backdrop-filter:blur(8px)}
     .project-box div{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:14px}
     .project-box div:last-child{border:0}
+
+    /* Grupo: burbuja que se agranda */
+    .team{background:#fff;border-top:1px solid var(--line)}
+    .team-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+    .team-copy p{color:var(--muted);margin-top:12px;max-width:520px}
+    .team-copy .tag{color:var(--blue);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1.4px}
+    .team-copy h2{margin-top:8px}
+    .bubble-wrap{display:grid;place-items:center;padding:24px 0}
+    .bubble{position:relative;width:min(78vw,340px);aspect-ratio:1;padding:0;border:0;background:none;border-radius:50%;cursor:zoom-in;animation:float 6s ease-in-out infinite}
+    .bubble img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 62%;border:7px solid #fff;box-shadow:var(--shadow),0 0 0 10px rgba(63,69,223,.1),0 0 0 22px rgba(32,185,155,.1);transition:transform .3s ease}
+    .bubble:hover img{transform:scale(1.04)}
+    .bubble-hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);white-space:nowrap;background:var(--blue);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:999px;box-shadow:0 10px 24px rgba(63,69,223,.3)}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .lightbox{position:fixed;inset:0;z-index:200;display:grid;place-items:center;align-content:center;gap:14px;padding:20px;background:rgba(15,18,60,.86);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;cursor:zoom-out}
+    .lightbox.open{opacity:1;visibility:visible}
+    .lightbox img{max-width:min(1100px,100%);max-height:78vh;width:auto;height:auto;border:6px solid #fff;border-radius:50%;transform:scale(.25);transition:transform .45s cubic-bezier(.2,.9,.3,1.1),border-radius .45s ease;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+    .lightbox.open img{transform:scale(1);border-radius:24px}
+    .lightbox figcaption{color:#e5e8ff;font-size:14px;text-align:center}
+    .lightbox-close{position:absolute;top:16px;right:16px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:20px;cursor:pointer}
+
+    /* Efectos visuales */
+    .progress{position:fixed;top:0;left:0;height:4px;width:100%;z-index:120;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--blue),var(--green),#d946c8)}
+    .nav{transition:box-shadow .3s ease}
+    .nav.scrolled{box-shadow:0 10px 30px rgba(42,53,150,.1)}
+    .js .reveal{opacity:0}
+    .js .reveal.in{opacity:1;animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0s)}
+    @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+    @keyframes shimmer{to{background-position:200% 50%}}
+    .gradient{background-size:200% 100%;animation:shimmer 5s linear infinite;background-image:linear-gradient(90deg,var(--blue-dark),#5844e8,var(--green),#5844e8,var(--blue-dark))}
+    .hero-grid{position:relative;z-index:1}
+    .floaters{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .floaters span{position:absolute;font-size:30px;opacity:.55;animation:drift 9s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(63,69,223,.2))}
+    .floaters span:nth-child(1){left:6%;top:14%}
+    .floaters span:nth-child(2){left:46%;top:8%;animation-delay:-3s;font-size:24px}
+    .floaters span:nth-child(3){right:7%;top:20%;animation-delay:-5s}
+    .floaters span:nth-child(4){left:40%;bottom:6%;animation-delay:-2s;font-size:26px}
+    .floaters span:nth-child(5){right:3%;bottom:12%;animation-delay:-7s;font-size:24px}
+    @keyframes drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(10px,-22px) rotate(14deg)}}
+    .hero:before{animation:blob 12s ease-in-out infinite}
+    .hero:after{animation:blob 14s ease-in-out infinite reverse}
+    @keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,26px) scale(1.12)}}
+    .hero-image{animation:float 7s ease-in-out infinite;transition:box-shadow .3s ease}
+    .hero-image:hover{box-shadow:0 28px 70px rgba(63,69,223,.28)}
+    .btn-primary{position:relative;overflow:hidden}
+    .btn-primary:after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .6s ease}
+    .btn-primary:hover:after{left:130%}
+    .icon{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+    .card:hover .icon{transform:rotate(-8deg) scale(1.12)}
+    .step{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+    .step:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#c9d0f5}
+    .step:hover .num{background:linear-gradient(90deg,var(--blue),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .project-box{transition:transform .3s ease}
+    .project-box:hover{transform:translateY(-4px)}
+
+    /* Uso racional de medicamentos */
+    .rational{background:linear-gradient(180deg,#f7fffc,#f2f5ff);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .rational-intro{max-width:760px;margin:0 auto 30px;text-align:center;color:var(--muted)}
+    .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+    .tab{padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--blue);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:background .2s,color .2s,box-shadow .2s,transform .2s}
+    .tab:hover{transform:translateY(-2px)}
+    .tab[aria-selected="true"]{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 10px 24px rgba(63,69,223,.23)}
+    .tab-panel{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .tab-panel[hidden]{display:none}
+    .point{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;animation:rise .5s ease backwards;animation-delay:calc(var(--i,0)*70ms);transition:transform .25s ease,box-shadow .25s ease}
+    .point:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .pi{width:46px;height:46px;flex:0 0 46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#e8eaff}
+    .point h3{font-family:var(--display);font-size:16px;margin-bottom:3px}
+    .point p{font-size:14px;color:var(--muted)}
+    .rational-note{margin:26px auto 0;max-width:760px;text-align:center;font-size:14px;color:var(--muted);background:#fff;border:1px dashed #c9d0f5;border-radius:18px;padding:14px 18px}
+    @media(max-width:700px){.tab-panel{grid-template-columns:1fr}.floaters span:nth-child(2),.floaters span:nth-child(4){display:none}}
+
+    /* Footer */
     footer{padding:35px 0;background:#171a58;color:#dce0ff}
     .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
-    .footer-brand{font-family:Poppins;font-weight:800;font-size:21px}
-    .small{font-size:12px;color:#aeb5dd}
-    .feature-card{cursor:pointer;overflow:hidden;outline:none;position:relative}
-    .feature-card:focus-visible{box-shadow:0 0 0 3px rgba(63,69,223,.22),var(--shadow)}
-    .feature-main{position:relative}
-    .feature-card .more{display:inline-flex;margin-top:16px;padding:7px 11px;border-radius:999px;background:#f0f2ff;color:var(--blue);font-size:12px;font-weight:800}
-    .feature-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .32s ease,opacity .25s ease,margin-top .25s ease,padding-top .25s ease;border-top:1px solid transparent}
-    .feature-detail p{color:var(--muted);font-size:13px;margin-top:6px}
-    .feature-card.open{box-shadow:var(--shadow)}
-    .feature-card.open .feature-detail{max-height:260px;opacity:1;margin-top:18px;padding-top:17px;border-top-color:var(--line)}
-    .feature-card.open .more{background:var(--blue);color:white}
+    .footer-brand{font-family:var(--display);font-weight:800;font-size:21px}
+    .small{font-size:12.5px;color:#b9c0e6}
+    .disclaimer{max-width:420px;text-align:right}
+
+    /* Tablet */
     @media(max-width:900px){
-      .links{display:none}.hero-grid,.assistant,.project-grid{grid-template-columns:1fr}.hero{padding-top:45px}
-      .features{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}
-      .assistant{gap:30px}.project-grid{gap:25px}
+      .links{display:none}
+      .links.show{display:flex;flex-direction:column;gap:0;position:absolute;top:76px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:8px 4%;box-shadow:0 18px 30px rgba(42,53,150,.1)}
+      .links.show a{padding:14px 4px;border-bottom:1px solid var(--line);font-size:16px}
+      .links.show a:last-child{border:0}
+      .menu-btn{display:grid;place-items:center}
+      .hero-grid,.project-grid{grid-template-columns:1fr}
+      .hero{padding-top:45px}
+      .features,.steps{grid-template-columns:1fr 1fr}
+      .project-grid{gap:25px}
     }
+    /* Celular */
     @media(max-width:600px){
-      section{padding:65px 0}.features,.steps,.lang{grid-template-columns:1fr}
-      .hero h1{letter-spacing:-1.5px}.hero p{font-size:16px}.nav-cta{padding:10px 14px;font-size:13px}
-      .hero-image,.showcase-img{border-width:4px;border-radius:22px}.card{padding:22px}
+      section{padding:65px 0}
+      .features,.steps{grid-template-columns:1fr}
+      h1{letter-spacing:-1.5px}
+      .hero p{font-size:16px}
+      .hero-image{border-width:4px;border-radius:22px}
+      .card-toggle{padding:22px}.detail-inner{padding:0 22px}
+      .showcase-img{min-width:820px;border-width:4px;border-radius:22px}
+      .showcase-hint{display:block}
       .footer-inner{flex-direction:column;text-align:center}
+      .disclaimer{text-align:center}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *{transition:none!important;animation:none!important}
+      .progress{display:none}
     }
   </style>
 </head>
 <body>
-  <!-- === TU HTML ORIGINAL (todo lo que ya tenías) === -->
-  <!-- Pega aquí todo el código que ya tenías antes de la burbuja -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <a class="skip" href="#funciones">Saltar al contenido</a>
 
-  <!-- === BURBUJA FINAL (con foto y todo pro) === -->
-  <div id="appBubble" 
-       class="fixed bottom-6 right-6 z-50 flex flex-col items-center cursor-pointer group transition-all duration-300">
-    <div class="w-20 h-20 bg-white rounded-full shadow-2xl flex items-center justify-center 
-                transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-blue-400 ring-4 ring-blue-500 ring-offset-4">
-      <img src="image.png" 
-           alt="Equipo MEmori" 
-           class="w-16 h-16 rounded-full object-cover transition-all duration-300">
+  <nav class="nav" aria-label="Principal">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">💊</span>MEmori</a>
+      <div class="links" id="menu">
+        <a href="#funciones">Funciones</a>
+        <a href="#app">La aplicación</a>
+        <a href="#pasos">Cómo funciona</a>
+        <a href="#uso-racional">Uso racional</a>
+        <a href="#grupo">Grupo</a>
+        <a href="#proyecto">Proyecto</a>
+      </div>
+      <div class="nav-right">
+        <a class="btn btn-primary" href="#app">Ver la app</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">☰</button>
+      </div>
     </div>
-    <div class="text-center text-xs mt-1 text-gray-600 font-medium tracking-wide">
-      ¡Abrir App!
+  </nav>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="floaters" aria-hidden="true"><span>💊</span><span>💙</span><span>⏰</span><span>🩺</span><span>💊</span></div>
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">💙 Salud · Organización · Tecnología</div>
+          <h1>Tu aliado en <span class="gradient">cada dosis.</span></h1>
+          <p>MEmori te ayuda a organizar tus medicamentos, recordar tus dosis, gestionar tus citas y mantener tu información de salud de forma sencilla e intuitiva.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#funciones">Descubrir funciones</a>
+            <a class="btn btn-secondary" href="#app">Ver pantallas</a>
+          </div>
+          <div class="hero-note">Porque tu salud no espera ♡</div>
+        </div>
+        <div class="reveal" style="--d:.2s">
+          <img class="hero-image" src="memori-portada.jpeg" width="1254" height="1254" fetchpriority="high" alt="Presentación de MEmori: pantalla de inicio en modo claro y oscuro con próximas dosis y citas médicas">
+        </div>
+      </div>
+    </section>
+
+    <section id="funciones">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="tag">Todo en un solo lugar</div>
+          <h2>Funciones pensadas para ti</h2>
+          <p>Toca una tarjeta para ver por qué cada función es importante.</p>
+        </div>
+        <div class="features">
+          <article class="card reveal" style="--d:0.0s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d1"><div class="icon i-blue" aria-hidden="true">🔔</div><h3>Recordatorios personalizados</h3><p>Configura avisos para tus dosis y recibe recordatorios en el momento que los necesitas.</p><span class="more">Ver importancia +</span></button>
+            <div class="detail" id="d1"><div class="detail-inner"><div><strong>¿Por qué es importante?</strong><p>Ayuda a mantener horarios constantes y a reducir el riesgo de olvidar una dosis. Seguir correctamente los horarios indicados favorece un uso más seguro y ordenado de los medicamentos.</p></div></div></div>
+          </article>
+          <article class="card reveal" style="--d:0.1s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d2"><div class="icon i-green" aria-hidden="true">💊</div><h3>Control de medicamentos</h3><p>Añade medicamentos, dosis, frecuencia y cantidad disponible para llevar un mejor control.</p><span class="more">Ver importancia +</span></button>
+            <div class="detail" id="d2"><div class="detail-inner"><div><strong>Uso correcto de los medicamentos</strong><p>Registrar nombre, dosis y frecuencia permite tener la información organizada y facilita seguir las indicaciones de uso. MEmori busca apoyar la adherencia al tratamiento y evitar confusiones.</p></div></div></div>
+          </article>
+          <article class="card reveal" style="--d:0.2s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d3"><div class="icon i-cyan" aria-hidden="true">📷</div><h3>Escanea y organiza</h3><p>Usa la cámara para consultar información y recomendaciones relacionadas con el almacenamiento.</p><span class="more">Ver importancia +</span></button>
+            <div class="detail" id="d3"><div class="detail-inner"><div><strong>¿Por qué importa el almacenamiento?</strong><p>Conservar un medicamento en condiciones adecuadas ayuda a mantener su calidad. La información debe contrastarse con el envase, el prospecto o las indicaciones del profesional de salud.</p></div></div></div>
+          </article>
+          <article class="card reveal" style="--d:0.0s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d4"><div class="icon i-purple" aria-hidden="true">📅</div><h3>Citas médicas</h3><p>Registra tus citas, profesionales, lugares y avisos para tener todo organizado.</p><span class="more">Ver importancia +</span></button>
+            <div class="detail" id="d4"><div class="detail-inner"><div><strong>¿Por qué es importante?</strong><p>Organizar las citas facilita recordar controles, consultas y seguimientos. También ayuda a tener a mano la información básica de cada cita y sus recordatorios.</p></div></div></div>
+          </article>
+          <article class="card reveal" style="--d:0.1s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d5"><div class="icon i-pink" aria-hidden="true">🤖</div><h3>Asistente MEmori</h3><p>Habla con el asistente para consultar información de forma rápida y natural.</p><span class="more">Ver cómo ayuda +</span></button>
+            <div class="detail" id="d5"><div class="detail-inner"><div><strong>Un asistente integrado, no una pestaña independiente</strong><p>El asistente forma parte de la experiencia de MEmori. Puedes hablarle y hacer preguntas, por ejemplo, sobre tu próxima dosis o una cita registrada, y recibir una respuesta sin entrar a una sección exclusiva del menú.</p></div></div></div>
+          </article>
+          <article class="card reveal" style="--d:0.2s">
+            <button class="card-toggle" aria-expanded="false" aria-controls="d6"><div class="icon i-yellow" aria-hidden="true">🌎</div><h3>Español e inglés</h3><p>Utiliza MEmori en español o inglés, con opciones de interacción por voz y lectura.</p><span class="more">Ver importancia +</span></button>
+            <div class="detail" id="d6"><div class="detail-inner"><div><strong>Accesibilidad y comprensión</strong><p>Ofrecer español e inglés permite adaptar la experiencia a más usuarios. Las opciones de voz y lectura también pueden facilitar la interacción y comprensión de la información disponible.</p></div></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="app">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="tag">Así se ve MEmori</div>
+          <h2>Una interfaz clara y fácil de usar</h2>
+          <p>Explora las principales pantallas de la aplicación y conoce cómo se organiza cada función.</p>
+        </div>
+        <div class="showcase-scroll" tabindex="0" role="region" aria-label="Pantallas de la aplicación (desliza para ver más)">
+          <img class="showcase-img" src="memori-funciones.jpeg" width="1536" height="1024" loading="lazy" decoding="async" alt="Seis pantallas de MEmori: Inicio, Citas, Medicinas, Añadir medicamento, Cámara y Configuración">
+        </div>
+        <p class="showcase-hint">← Desliza para ver todas las pantallas →</p>
+      </div>
+    </section>
+
+    <section id="pasos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="tag">Experiencia sencilla</div>
+          <h2>De organizar a recordar, en pocos pasos</h2>
+          <p>La idea es que la tecnología ayude, no que complique.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal" style="--d:0.0s"><div class="num">01</div><h3>Registra</h3><p>Añade tus medicamentos y sus datos principales.</p></div>
+          <div class="step reveal" style="--d:0.1s"><div class="num">02</div><h3>Organiza</h3><p>Gestiona dosis, frecuencia y citas desde la app.</p></div>
+          <div class="step reveal" style="--d:0.2s"><div class="num">03</div><h3>Recuerda</h3><p>Recibe avisos personalizados en el momento indicado.</p></div>
+          <div class="step reveal" style="--d:0.3s"><div class="num">04</div><h3>Consulta</h3><p>Usa el asistente para encontrar rápidamente información.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rational" id="uso-racional">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="tag">Uso racional de medicamentos</div>
+          <h2>Un medicamento bien usado cuida mejor</h2>
+          <p>Según la OMS, el uso racional implica que cada persona reciba el medicamento adecuado a su necesidad, en la dosis y por el tiempo correctos. MEmori busca apoyar ese objetivo desde lo cotidiano.</p>
+        </div>
+        <div class="tabs reveal" role="tablist" aria-label="Uso racional de medicamentos">
+          <button class="tab" role="tab" id="tab1" aria-selected="true" aria-controls="panel1">Qué busca prevenir</button>
+          <button class="tab" role="tab" id="tab2" aria-selected="false" aria-controls="panel2" tabindex="-1">Cómo ayuda MEmori</button>
+          <button class="tab" role="tab" id="tab3" aria-selected="false" aria-controls="panel3" tabindex="-1">Buenas prácticas</button>
+        </div>
+        <div class="tab-panel" id="panel1" role="tabpanel" aria-labelledby="tab1">
+            <div class="point" style="--i:0"><div class="pi" aria-hidden="true">⏰</div><div><h3>Olvidar una dosis</h3><p>Saltarse horarios o tomar a destiempo puede afectar el resultado del tratamiento.</p></div></div>
+            <div class="point" style="--i:1"><div class="pi" aria-hidden="true">🔁</div><div><h3>Repetir una dosis por duda</h3><p>La pregunta “¿ya me la tomé?” puede llevar a tomar de más.</p></div></div>
+            <div class="point" style="--i:2"><div class="pi" aria-hidden="true">📦</div><div><h3>Quedarse sin medicamento</h3><p>Interrumpir el tratamiento por falta de unidades sin darse cuenta a tiempo.</p></div></div>
+            <div class="point" style="--i:3"><div class="pi" aria-hidden="true">🌡️</div><div><h3>Guardarlo mal</h3><p>El calor, la humedad y la luz pueden afectar la calidad del medicamento.</p></div></div>
+            <div class="point" style="--i:4"><div class="pi" aria-hidden="true">📅</div><div><h3>Perder controles médicos</h3><p>Sin seguimiento es más difícil que el profesional revise cómo va el tratamiento.</p></div></div>
+            <div class="point" style="--i:5"><div class="pi" aria-hidden="true">💬</div><div><h3>Cambiar la indicación por cuenta propia</h3><p>Subir, bajar o suspender una dosis sin consultar puede ser riesgoso.</p></div></div>
+        </div>
+        <div class="tab-panel" id="panel2" role="tabpanel" aria-labelledby="tab2" hidden>
+            <div class="point" style="--i:0"><div class="pi" aria-hidden="true">🔔</div><div><h3>Recordatorios con notificación o alarma</h3><p>Te avisan en el horario de cada dosis para que no dependas de la memoria.</p></div></div>
+            <div class="point" style="--i:1"><div class="pi" aria-hidden="true">✅</div><div><h3>Registro claro</h3><p>Nombre, dosis y frecuencia guardados en un solo lugar.</p></div></div>
+            <div class="point" style="--i:2"><div class="pi" aria-hidden="true">📉</div><div><h3>Control de unidades</h3><p>Descuenta lo que usas y avisa cuando quedan pocas.</p></div></div>
+            <div class="point" style="--i:3"><div class="pi" aria-hidden="true">📷</div><div><h3>Cámara y almacenamiento</h3><p>Lee la caja y muestra sus condiciones de almacenamiento y lugares recomendados en casa.</p></div></div>
+            <div class="point" style="--i:4"><div class="pi" aria-hidden="true">📅</div><div><h3>Citas médicas</h3><p>Recordatorios de tus controles con la anticipación que elijas.</p></div></div>
+            <div class="point" style="--i:5"><div class="pi" aria-hidden="true">🩺</div><div><h3>Siempre bajo indicación profesional</h3><p>MEmori no diagnostica ni receta: organiza lo que tu médico o farmacéutico ya te indicó.</p></div></div>
+        </div>
+        <div class="tab-panel" id="panel3" role="tabpanel" aria-labelledby="tab3" hidden>
+            <div class="point" style="--i:0"><div class="pi" aria-hidden="true">👩‍⚕️</div><div><h3>Sigue la indicación</h3><p>Toma el medicamento como lo indicó tu médico o farmacéutico.</p></div></div>
+            <div class="point" style="--i:1"><div class="pi" aria-hidden="true">🚫</div><div><h3>No cambies ni suspendas por tu cuenta</h3><p>Si tienes dudas o molestias, consulta antes de decidir.</p></div></div>
+            <div class="point" style="--i:2"><div class="pi" aria-hidden="true">🤝</div><div><h3>No compartas medicamentos</h3><p>Lo que le sirve a una persona puede no ser adecuado para otra.</p></div></div>
+            <div class="point" style="--i:3"><div class="pi" aria-hidden="true">🗓️</div><div><h3>Revisa la fecha de vencimiento</h3><p>Un medicamento vencido no debe usarse.</p></div></div>
+            <div class="point" style="--i:4"><div class="pi" aria-hidden="true">🏠</div><div><h3>Guárdalo bien</h3><p>En un lugar fresco y seco, lejos de la luz y de los niños, salvo que el envase diga otra cosa.</p></div></div>
+            <div class="point" style="--i:5"><div class="pi" aria-hidden="true">💊</div><div><h3>Pregunta al regente de farmacia</h3><p>Resuelve dudas sobre dosis, horarios y almacenamiento.</p></div></div>
+        </div>
+        <p class="rational-note reveal">MEmori es un apoyo para organizarte. Ante cualquier duda sobre tu tratamiento, consulta a tu médico o farmacéutico.</p>
+      </div>
+    </section>
+
+    <section class="team" id="grupo">
+      <div class="container team-grid">
+        <div class="team-copy reveal">
+          <div class="tag">Nuestro grupo</div>
+          <h2>Ficha 3294119</h2>
+          <p>Regencia de Farmacia, SENA. Toca la burbuja para ver la foto completa del grupo.</p>
+        </div>
+        <div class="bubble-wrap reveal" style="--d:.15s">
+          <button class="bubble" id="bubble" aria-haspopup="dialog" aria-label="Ampliar la foto del grupo">
+            <img src="memori-grupo.jpeg" width="1600" height="900" loading="lazy" decoding="async" alt="Foto grupal de la ficha 3294119 con uniformes blancos y azules">
+            <span class="bubble-hint">🔍 Toca para ampliar</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="project" id="proyecto">
+      <div class="container project-grid">
+        <div>
+          <div class="tag">SOBRE EL PROYECTO</div>
+          <h2>MEmori: pequeños hábitos, grandes cambios.</h2>
+          <p>MEmori nace como un proyecto enfocado en facilitar la organización de medicamentos y citas mediante una experiencia digital sencilla, accesible y pensada para el usuario.</p>
+          <p style="margin-top:16px">La aplicación combina recordatorios, gestión de medicamentos, cámara, citas, asistente y soporte bilingüe en una sola experiencia.</p>
+        </div>
+        <div class="project-box reveal" style="--d:.15s">
+          <div><strong>Proyecto:</strong> MEmori</div>
+          <div><strong>Programa:</strong> Regencia de Farmacia</div>
+          <div><strong>Ficha:</strong> 3294119</div>
+          <div><strong>Enfoque:</strong> Salud + tecnología</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><div class="footer-brand">MEmori</div><div class="small">Tu aliado en cada dosis.</div></div>
+      <div class="small disclaimer">MEmori es un apoyo para organizarte y no reemplaza la indicación de tu médico o farmacéutico.<br>© <span id="year"></span> MEmori · Proyecto académico</div>
     </div>
-  </div>
+  </footer>
+
+  <figure class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto del grupo ampliada" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar foto">✕</button>
+    <img src="memori-grupo.jpeg" width="1600" height="900" decoding="async" alt="Foto grupal de la ficha 3294119 con uniformes blancos y azules">
+    <figcaption>Ficha 3294119 · Regencia de Farmacia · SENA</figcaption>
+  </figure>
 
   <script>
-    // === TU SCRIPT ORIGINAL (manténlo igual) ===
-    document.querySelectorAll(".feature-card").forEach(card => {
-      const toggle = () => { 
-        const open = card.classList.toggle("open"); 
-        card.setAttribute("aria-expanded", open ? "true" : "false"); 
-      };
-      card.addEventListener("click", toggle);
-      card.addEventListener("keydown", e => { 
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } 
-      });
-    });
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.documentElement.classList.add("js");
 
-    // === BURBUJA CON TODO ===
-    const bubble = document.getElementById("appBubble");
-
-    // Sonido al hacer clic
-    function playSound() {
-      const sound = new Audio("https://assets.mixkit.co/sfx/preview/274/274.wav");
-      sound.volume = 0.3;
-      sound.play().catch(() => {});
+    // Aparecer al hacer scroll
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+      }, { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add("in"));
     }
 
-    bubble.addEventListener("click", () => {
-      playSound();
-      window.location.href = "https://stuwar110.github.io/MEmori/";
+    // Barra de progreso y sombra del menú
+    const progress = document.getElementById("progress");
+    const nav = document.querySelector(".nav");
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
+      nav.classList.toggle("scrolled", scrollY > 8);
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // Pestañas de uso racional
+    const tabs = [...document.querySelectorAll(".tab")];
+    const selectTab = t => {
+      tabs.forEach(x => {
+        const on = x === t;
+        x.setAttribute("aria-selected", on);
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => selectTab(t));
+      t.addEventListener("keydown", e => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+        selectTab(next); next.focus();
+      });
+    });
+    // Burbuja que se agranda
+    const bubble = document.getElementById("bubble");
+    const box = document.getElementById("lightbox");
+    const closeBtn = document.getElementById("lightboxClose");
+    const setBox = open => {
+      box.classList.toggle("open", open);
+      box.setAttribute("aria-hidden", !open);
+      document.body.style.overflow = open ? "hidden" : "";
+      (open ? closeBtn : bubble).focus();
+    };
+    bubble.addEventListener("click", () => setBox(true));
+    box.addEventListener("click", () => setBox(false));
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && box.classList.contains("open")) setBox(false); });
+
+    // Tarjetas desplegables
+    document.querySelectorAll(".card").forEach(card => {
+      const btn = card.querySelector(".card-toggle");
+      btn.addEventListener("click", () => {
+        const open = card.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open);
+        btn.querySelector(".more").textContent = btn.querySelector(".more").textContent.replace(open ? "+" : "−", open ? "−" : "+");
+      });
     });
 
-    bubble.addEventListener("mouseenter", () => {
-      bubble.style.transform = "scale(1.08)";
-    });
-    bubble.addEventListener("mouseleave", () => {
-      bubble.style.transform = "scale(1)";
-    });
+    // Menú del celular
+    const menu = document.getElementById("menu");
+    const menuBtn = document.getElementById("menuBtn");
+    const setMenu = open => {
+      menu.classList.toggle("show", open);
+      menuBtn.setAttribute("aria-expanded", open);
+      menuBtn.textContent = open ? "✕" : "☰";
+    };
+    menuBtn.addEventListener("click", () => setMenu(!menu.classList.contains("show")));
+    menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
