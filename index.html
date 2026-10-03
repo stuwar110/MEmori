@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MEmori - Tu aliado en cada dosis. Organiza medicamentos, citas y recordatorios de forma sencilla.">
+  <meta name="description" content="MEmori - Tu aliado en cada dosis.">
   <title>MEmori | Tu aliado en cada dosis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,114 +150,60 @@
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#inicio"><span class="brand-mark">💊</span>MEmori</a>
-      <div class="links">
-        <a href="#funciones">Funciones</a>
-        <a href="#funciones">Funciones</a>
-        <a href="#app">La aplicación</a>
-        <a href="#proyecto">Proyecto</a>
-      </div>
-      <a class="nav-cta" href="#app">Conocer MEmori</a>
+  <!-- === TODO TU HTML ORIGINAL AQUÍ (desde <nav> hasta el footer) === -->
+  <!-- Pega aquí todo lo que ya tenías en tu index.html original -->
+
+  <!-- === BURBUJA FINAL (con icono, sonido y todo pro) === -->
+  <div id="appBubble" 
+       class="fixed bottom-6 right-6 z-50 flex flex-col items-center cursor-pointer group transition-all duration-300">
+    <div class="w-20 h-20 bg-white rounded-full shadow-2xl flex items-center justify-center 
+                transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-blue-400 ring-4 ring-blue-500 ring-offset-4">
+      <img src="image.png" 
+           alt="MEmori" 
+           class="w-16 h-16 rounded-full object-cover transition-all duration-300">
     </div>
-  </nav>
-
-  <main>
-    <section class="hero" id="inicio">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">💙 Salud · Organización · Tecnología</div>
-          <h1>Tu aliado en <span class="gradient">cada dosis.</span></h1>
-          <p>MEmori te ayuda a organizar tus medicamentos, recordar tus dosis, gestionar tus citas y mantener tu información de salud de forma sencilla e intuitiva.</p>
-          <div class="actions">
-            <a class="btn btn-primary" href="#funciones">Descubrir funciones →</a>
-            <a class="btn btn-secondary" href="#funciones">Ver funciones</a>
-          </div>
-          <div class="hero-note">Porque tu salud no espera ♡</div>
-        </div>
-        <div>
-          <img class="hero-image" src="memori-portada.jpeg" alt="Presentación de la aplicación MEmori">
-        </div>
-      </div>
-    </section>
-
-    <section id="funciones">
-      <div class="container">
-        <div class="section-head">
-          <div class="tag">Todo en un solo lugar</div>
-          <h2>Funciones pensadas para ti</h2>
-          <p>Una experiencia sencilla para ayudarte a mantener tus medicamentos, citas y recordatorios organizados.</p>
-        </div>
-        <div class="features">
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-blue">🔔</div><h3>Recordatorios personalizados</h3><p>Configura avisos para tus dosis y recibe recordatorios en el momento que los necesitas.</p><span class="more">Ver importancia +</span></div><div class="feature-detail"><strong>¿Por qué es importante?</strong><p>Ayuda a mantener horarios constantes y a reducir el riesgo de olvidar una dosis. Seguir correctamente los horarios indicados favorece un uso más seguro y ordenado de los medicamentos.</p></div></article>
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-green">💊</div><h3>Control de medicamentos</h3><p>Añade medicamentos, dosis, frecuencia y cantidad disponible para llevar un mejor control.</p><span class="more">Ver importancia +</span></div><div class="feature-detail"><strong>Uso correcto de los medicamentos</strong><p>Registrar nombre, dosis y frecuencia permite tener la información organizada y facilita seguir las indicaciones de uso. MEmori busca apoyar la adherencia al tratamiento y evitar confusiones.</p></div></article>
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-cyan">📷</div><h3>Escanea y organiza</h3><p>Usa la cámara para consultar información y recomendaciones relacionadas con el almacenamiento.</p><span class="more">Ver importancia +</span></div><div class="feature-detail"><strong>¿Por qué importa el almacenamiento?</strong><p>Conservar un medicamento en condiciones adecuadas ayuda a mantener su calidad. La información debe contrastarse con el envase, el prospecto o las indicaciones del profesional de salud.</p></div></article>
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-purple">📅</div><h3>Citas médicas</h3><p>Registra tus citas, profesionales, lugares y avisos para tener todo organizado.</p><span class="more">Ver importancia +</span></div><div class="feature-detail"><strong>¿Por qué es importante?</strong><p>Organizar las citas facilita recordar controles, consultas y seguimientos. También ayuda a tener a mano la información básica de cada cita y sus recordatorios.</p></div></article>
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-pink">🤖</div><h3>Asistente MEmori</h3><p>Habla con el asistente para consultar información de forma rápida y natural.</p><span class="more">Ver cómo ayuda +</span></div><div class="feature-detail"><strong>Un asistente integrado, no una pestaña independiente</strong><p>El asistente forma parte de la experiencia de MEmori. Puedes hablarle y hacer preguntas, por ejemplo, sobre tu próxima dosis o una cita registrada, y recibir una respuesta sin entrar a una sección exclusiva del menú.</p></div></article>
-          <article class="card feature-card" tabindex="0" aria-expanded="false"><div class="feature-main"><div class="icon i-yellow">🌎</div><h3>Español e inglés</h3><p>Utiliza MEmori en español o inglés, con opciones de interacción por voz y lectura.</p><span class="more">Ver importancia +</span></div><div class="feature-detail"><strong>Accesibilidad y comprensión</strong><p>Ofrecer español e inglés permite adaptar la experiencia a más usuarios. Las opciones de voz y lectura también pueden facilitar la interacción y comprensión de la información disponible.</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="showcase" id="app">
-      <div class="container">
-        <div class="section-head">
-          <div class="tag">Así se ve MEmori</div>
-          <h2>Una interfaz clara y fácil de usar</h2>
-          <p>Explora las principales pantallas de la aplicación y conoce cómo se organiza cada función.</p>
-        </div>
-        <img class="showcase-img" src="memori-funciones.jpeg" alt="Pantallas de las funciones de MEmori">
-      </div>
-    </section>
-<section>
-      <div class="container">
-        <div class="section-head">
-          <div class="tag">Experiencia sencilla</div>
-          <h2>De organizar a recordar, en pocos pasos</h2>
-          <p>La idea es que la tecnología ayude, no que complique.</p>
-        </div>
-        <div class="steps">
-          <div class="step"><div class="num">01</div><h3>Registra</h3><p>Añade tus medicamentos y sus datos principales.</p></div>
-          <div class="step"><div class="num">02</div><h3>Organiza</h3><p>Gestiona dosis, frecuencia y citas desde la app.</p></div>
-          <div class="step"><div class="num">03</div><h3>Recuerda</h3><p>Recibe avisos personalizados en el momento indicado.</p></div>
-          <div class="step"><div class="num">04</div><h3>Consulta</h3><p>Usa el asistente para encontrar rápidamente información.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="project" id="proyecto">
-      <div class="container project-grid">
-        <div>
-          <div class="tag" style="color:#aeb6ff">SOBRE EL PROYECTO</div>
-          <h2>MEmori: pequeños hábitos, grandes cambios.</h2>
-          <p>MEmori nace como un proyecto enfocado en facilitar la organización de medicamentos y citas mediante una experiencia digital sencilla, accesible y pensada para el usuario.</p>
-          <p style="margin-top:16px">La aplicación combina recordatorios, gestión de medicamentos, cámara, citas, asistente y soporte bilingüe en una sola experiencia.</p>
-        </div>
-        <div class="project-box">
-          <div><strong>Proyecto:</strong> MEmori</div>
-          <div><strong>Programa:</strong> Regencia de Farmacia</div>
-          <div><strong>Ficha:</strong> 3294119</div>
-          <div><strong>Enfoque:</strong> Salud + tecnología</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div><div class="footer-brand">MEmori</div><div class="small">Tu aliado en cada dosis.</div></div>
-      <div class="small">© <span id="year"></span> MEmori · Proyecto académico</div>
+    <div class="text-center text-xs mt-1 text-gray-600 font-medium tracking-wide">
+      ¡Abrir App!
     </div>
-  </footer>
+  </div>
 
   <script>
+    // === TU SCRIPT ORIGINAL (manténlo igual) ===
     document.querySelectorAll(".feature-card").forEach(card => {
-      const toggle = () => { const open = card.classList.toggle("open"); card.setAttribute("aria-expanded", open ? "true" : "false"); };
+      const toggle = () => { 
+        const open = card.classList.toggle("open"); 
+        card.setAttribute("aria-expanded", open ? "true" : "false"); 
+      };
       card.addEventListener("click", toggle);
-      card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+      card.addEventListener("keydown", e => { 
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } 
+      });
     });
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // === BURBUJA CON TODO LO QUE PEDISTE ===
+    const bubble = document.getElementById("appBubble");
+
+    // Sonido al hacer clic
+    function playSound() {
+      const sound = new Audio("https://assets.mixkit.co/sfx/preview/274/274.wav"); // sonido de botón (puedes cambiarlo)
+      sound.volume = 0.3;
+      sound.play().catch(() => {}); // silencioso si falla
+    }
+
+    bubble.addEventListener("click", () => {
+      playSound();
+      // Abrir tu app web
+      window.location.href = "https://stuwar110.github.io/MEmori/";
+    });
+
+    // Animación extra en hover
+    bubble.addEventListener("mouseenter", () => {
+      bubble.style.transform = "scale(1.08)";
+    });
+    bubble.addEventListener("mouseleave", () => {
+      bubble.style.transform = "scale(1)";
+    });
   </script>
 </body>
 </html>
